@@ -17,7 +17,7 @@ object Titles {
   def impl[F[_] : Sync]: Titles[F] = new Titles[F] {
 
     def getTitles(urls: Vector[String]) = {
-      val unique = urls.toSet
+      val unique = urls.toSet.toVector
       unique.zip(unique.map(getTitle)).toMap.pure[F]
     }
 
