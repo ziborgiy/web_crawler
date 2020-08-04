@@ -6,6 +6,7 @@ val JsoupVersion = "1.13.1"
 
 lazy val root = (project in file("."))
   .settings(
+    mainClass in assembly := Some("com.ziborgiy.webcrawler.Main"),
     organization := "com.ziborgiy",
     name := "web-crawler",
     version := "0.0.1-SNAPSHOT",
