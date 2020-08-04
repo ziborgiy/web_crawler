@@ -4,6 +4,12 @@ Web-crawler is web server with http endpoint, allows receive sites titles by sen
 
 ### How it use
 
+- Download jar from https://github.com/ziborgiy/web_crawler/releases. Run application with:
+```shell script
+java -jar web-crawler-assembly-0.0.1-SNAPSHOT.jar
+```
+Application starts on 8081 port
+
 - Create json example:
 
 ```json
