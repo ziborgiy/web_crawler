@@ -1,8 +1,8 @@
-##Web-Crawler
+## Web-Crawler
 
 Web-crawler is web server with http endpoint, allows receive sites titles by sended urls
 
-###How it use
+### How it use
 
 - Create json example:
 
@@ -30,7 +30,7 @@ If url is incorrect we will look error in value, ie ("abcder": "Malformed URL: a
 
 If title not found we will look empty string instead result, ie ("https://twitter.com/home": "")
 
-###Tasklist
+### Tasklist
 
 - [x] Create base functionality getting titles from site by url 
 - [x] Create test specification for  routes
