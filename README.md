@@ -40,8 +40,9 @@ If title not found we will look empty string instead result, ie ("https://twitte
 
 - [x] Create base functionality getting titles from site by url 
 - [x] Create test specification for  routes
-- [ ] Create test specification for type class
-- [ ] Create test specification for server
+- [X] Create test specification for type class
+- [X] Create test specification for server
+- [ ] Append testcases
 - [ ] Resolve problem with too long answer if urls field too big (synchronous requests)
 - [ ] Filter unmatched urls before getTitle
 - [ ] Add comments
