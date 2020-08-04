@@ -38,3 +38,4 @@ If title not found we will look empty string instead result, ie ("https://twitte
 - [ ] Create test specification for server
 - [ ] Resolve problem with too long answer if urls field too big (synchronous requests)
 - [ ] Filter unmatched urls before getTitle
+- [ ] Add comments
