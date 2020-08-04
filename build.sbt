@@ -4,6 +4,16 @@ val ScalaTestVersion = "3.2.0"
 val LogbackVersion = "1.2.3"
 val JsoupVersion = "1.13.1"
 
+
+commands ++= Seq(
+  Command.command("cleanTest") { state =>
+    "clean" :: "test" :: "coverageReport" :: state
+  },
+  Command.command("packageAssemble") { state =>
+    "cleanTest" :: "assembly" :: state
+  },
+)
+
 lazy val root = (project in file("."))
   .settings(
     mainClass in assembly := Some("com.ziborgiy.webcrawler.Main"),
