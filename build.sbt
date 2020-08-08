@@ -33,7 +33,7 @@ lazy val root = (project in file("."))
       "org.jsoup" % "jsoup" % JsoupVersion,
     ),
   )
-coverageEnabled := true
+coverageEnabled.in(Test, test) := true
 
 scalacOptions ++= Seq(
   "-encoding", "UTF-8",
