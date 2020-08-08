@@ -17,8 +17,7 @@ object Titles {
   def impl[F[_] : Sync]: Titles[F] = new Titles[F] {
 
     def getTitles(urls: Vector[String]): F[Map[String, String]] = {
-      val unique = urls.toSet.toVector
-      unique.map(getTitle).toMap.pure[F]
+        urls.toSet.toVector.map(getTitle).toMap.pure[F]
     }
 
     def getTitle(url: String): (String, String) = Try(Jsoup.connect(url).get).toEither match {
