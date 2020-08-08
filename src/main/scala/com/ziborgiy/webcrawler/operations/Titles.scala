@@ -16,14 +16,14 @@ object Titles {
 
   def impl[F[_] : Sync]: Titles[F] = new Titles[F] {
 
-    def getTitles(urls: Vector[String]) = {
+    def getTitles(urls: Vector[String]): F[Map[String, String]] = {
       val unique = urls.toSet.toVector
-      unique.zip(unique.map(getTitle)).toMap.pure[F]
+      unique.map(getTitle).toMap.pure[F]
     }
 
-    private[this] def getTitle(url: String) = Try(Jsoup.connect(url).get).toEither match {
-      case Left(value) => s"${value.getMessage}"
-      case Right(value) => value.title()
+    def getTitle(url: String): (String, String) = Try(Jsoup.connect(url).get).toEither match {
+      case Left(value) => url -> s"${value.getMessage}"
+      case Right(value) => url -> value.title()
     }
   }
 }
