@@ -1,29 +1,39 @@
 package com.ziborgiy.webcrawler.operations
 
-import cats.effect.Sync
+import cats.Parallel
+import cats.effect.concurrent.Semaphore
+import cats.effect.{Concurrent, Sync, Timer}
 import cats.implicits._
 import org.jsoup.Jsoup
 
 import scala.util.Try
 
 trait Titles[F[_]] {
-  def getTitles(vector: Vector[String]): F[Map[String, String]]
+  def getTitles(urls: Vector[String])(channel: Map[String, String]): F[Unit]
 }
 
 object Titles {
-  def apply[F[_]](implicit ev: Titles[F]): Titles[F] = ev
 
+  def impl[F[_] : Sync : Concurrent : Timer : Parallel]: Titles[F] = new Titles[F] {
 
-  def impl[F[_] : Sync]: Titles[F] = new Titles[F] {
-
-    def getTitles(urls: Vector[String]) = {
-      val unique = urls.toSet.toVector
-      unique.zip(unique.map(getTitle)).toMap.pure[F]
+    def getTitles(urls: Vector[String])(channel: Map[String, String]): F[Unit] = {
+      println()
+      for {
+        s <- Semaphore(1)
+        _ <- urls.toSet.toVector.map((u: String) => new PreciousResource[F](u, updateChannel(channel), s).use).parSequence.void
+      } yield ()
     }
 
-    private[this] def getTitle(url: String) = Try(Jsoup.connect(url).get).toEither match {
-      case Left(value) => s"${value.getMessage}"
-      case Right(value) => value.title()
+    def getTitle(url: String): (String, String) = {
+      println()
+      Try(Jsoup.connect(url).get).toEither match {
+        case Left(value) => url -> s"${value.getMessage}"
+        case Right(value) => url -> value.title()
+      }
+    }
+
+    def updateChannel(channel: Map[String, String])(url: String) = {
+      (channel.toVector :+ getTitle(url)).toMap
     }
   }
 }
