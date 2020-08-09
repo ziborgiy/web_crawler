@@ -3,6 +3,7 @@ package com.ziborgiy.webcrawler
 import cats.effect.IO
 import cats.implicits._
 import com.ziborgiy.webcrawler.operations.Titles
+import com.ziborgiy.webcrawler.TestImplicits._
 import com.ziborgiy.webcrawler.server.WebcrawlerRoutes
 import io.circe.Json
 import io.circe.literal._
@@ -14,7 +15,6 @@ import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
 
 class CrawlerSpec extends AnyFlatSpec with Matchers {
-/*
   val success: Titles[IO] = (vector: Vector[String]) => Map("http://google.com" -> "Google").pure[IO]
   val response: IO[Response[IO]] = WebcrawlerRoutes.crawlerRoutes[IO](success).orNotFound.run(
     Method.POST(json"""{"urls":["http://google.com/"]}""", uri"/getTitles").unsafeRunSync()
@@ -41,5 +41,5 @@ class CrawlerSpec extends AnyFlatSpec with Matchers {
       expected => actualResp.as[A].unsafeRunSync() == expected
     )
     statusCheck && bodyCheck
-  }*/
+  }
 }

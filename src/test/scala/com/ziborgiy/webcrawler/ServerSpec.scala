@@ -1,6 +1,7 @@
 package com.ziborgiy.webcrawler
 
-import cats.effect.{ConcurrentEffect, ContextShift, IO, Timer}
+import cats.effect.IO
+import com.ziborgiy.webcrawler.TestImplicits._
 import com.ziborgiy.webcrawler.server.WebcrawlerServer
 import io.circe.Json
 import io.circe.literal._
@@ -15,9 +16,7 @@ import org.scalatest.matchers.should.Matchers
 import scala.concurrent.ExecutionContext.global
 
 class ServerSpec extends AnyFlatSpec with Matchers {
-  implicit val t: Timer[IO] = IO.timer(global)
-  implicit val cs: ContextShift[IO] = IO.contextShift(global)
-  implicit val ce: ConcurrentEffect[IO] = IO.ioConcurrentEffect
+
   WebcrawlerServer.stream[IO].compile.drain.start.unsafeRunSync()
 
   private val BASIC_JSON = json"""{"urls":["http://google.com/"]}"""
