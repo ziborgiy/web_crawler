@@ -17,10 +17,9 @@ object WebcrawlerRoutes {
     HttpRoutes.of[F] {
       case rq@POST -> Root / "getTitles" =>
         for {
-          ch <- (Map.empty[String,String]).pure[F]
           req <- rq.as[Urls]
-          _ <- T.getTitles(req.urls)(ch)
-          resp <- Ok(ch)
+          res <- T.getTitles(req.urls)
+          resp <- Ok(res)
         } yield resp
     }
   }
