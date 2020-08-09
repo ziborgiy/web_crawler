@@ -19,7 +19,7 @@ lazy val root = (project in file("."))
     mainClass in assembly := Some("com.ziborgiy.webcrawler.Main"),
     organization := "com.ziborgiy",
     name := "web-crawler",
-    version := "0.0.1-SNAPSHOT",
+    version := "0.1.0-SNAPSHOT",
     scalaVersion := "2.13.2",
     libraryDependencies ++= Seq(
       "org.http4s" %% "http4s-blaze-server" % Http4sVersion,

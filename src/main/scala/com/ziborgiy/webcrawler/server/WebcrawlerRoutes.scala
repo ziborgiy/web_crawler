@@ -2,11 +2,12 @@ package com.ziborgiy.webcrawler.server
 
 import cats.effect.Sync
 import cats.implicits._
-import com.ziborgiy.webcrawler.model.Urls
 import com.ziborgiy.webcrawler.model.Codecs._
+import com.ziborgiy.webcrawler.model.Urls
 import com.ziborgiy.webcrawler.operations.Titles
 import org.http4s.HttpRoutes
 import org.http4s.dsl.Http4sDsl
+
 
 object WebcrawlerRoutes {
 

@@ -1,28 +1,36 @@
 package com.ziborgiy.webcrawler.operations
 
-import cats.effect.Sync
+import cats.Parallel
+import cats.data.NonEmptyList
+import cats.effect.{Concurrent, Sync}
 import cats.implicits._
 import org.jsoup.Jsoup
 
 import scala.util.Try
 
 trait Titles[F[_]] {
-  def getTitles(vector: Vector[String]): F[Map[String, String]]
+  def getTitles(urls: Vector[String]): F[Map[String, String]]
 }
 
 object Titles {
-  def apply[F[_]](implicit ev: Titles[F]): Titles[F] = ev
 
-
-  def impl[F[_] : Sync]: Titles[F] = new Titles[F] {
+  def impl[F[_] : Sync : Parallel](implicit c: Concurrent[F]): Titles[F] = new Titles[F] {
 
     def getTitles(urls: Vector[String]): F[Map[String, String]] = {
-        urls.toSet.toVector.map(getTitle).toMap.pure[F]
+      for {
+        nel <- NonEmptyList.fromList(urls.toSet.toList).getOrElse(None.orNull).parTraverse(getTitle)
+      } yield {
+        nel.toList.toMap
+      }
     }
 
-    def getTitle(url: String): (String, String) = Try(Jsoup.connect(url).get).toEither match {
-      case Left(value) => url -> s"${value.getMessage}"
-      case Right(value) => url -> value.title()
+    def getTitle(url: String): F[(String, String)] = c.delay {
+      Try(Jsoup.connect(url).ignoreHttpErrors(true).get).toEither match {
+        case Left(value) => url -> s"${value.getMessage}"
+        case Right(value) => url -> value.title()
+      }
     }
   }
 }
+
+
