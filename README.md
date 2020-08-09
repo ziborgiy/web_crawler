@@ -6,7 +6,7 @@ Web-crawler is web server with http endpoint, allows receive sites titles by sen
 
 - Download jar from https://github.com/ziborgiy/web_crawler/releases. Run application with:
 ```shell script
-java -jar web-crawler-assembly-0.0.1-SNAPSHOT.jar
+java -jar web-crawler-assembly-0.1.0-SNAPSHOT.jar
 ```
 Application starts on 8081 port
 
@@ -43,6 +43,6 @@ If title not found we will look empty string instead result, ie ("https://twitte
 - [X] Create test specification for type class
 - [X] Create test specification for server
 - [ ] Append testcases
-- [ ] Resolve problem with too long answer if urls field too big (synchronous requests)
+- [X] Resolve problem with too long answer if urls field too big (synchronous requests)
 - [ ] Filter unmatched urls before getTitle
 - [ ] Add comments
