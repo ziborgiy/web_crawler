@@ -25,7 +25,6 @@ object Titles {
     }
 
     def getTitle(url: String): (String, String) = {
-      println()
       Try(Jsoup.connect(url).get).toEither match {
         case Left(value) => url -> s"${value.getMessage}"
         case Right(value) => url -> value.title()
