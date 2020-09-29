@@ -1,0 +1,57 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Crawler",
+    "description": "Document describes crawler api",
+    "version": "0.0.1"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8081",
+      "description": "Testing url"
+    }
+  ],
+  "paths": {
+    "/getTitles": {
+      "post": {
+        "summary": "Returns json document with titles of urls",
+        "description": "Request with list of urls",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "urls": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "A JSON document of url site titles",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

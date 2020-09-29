@@ -46,5 +46,6 @@ If title not found we will look empty string instead result, ie ("https://twitte
 - [ ] Append documents for new methods
 - [ ] Modified tests with tapir
 - [X] Resolve problem with too long answer if urls field too big (synchronous requests)
+- [ ] Resolve problem with big thread pool, if urls too big (restrict maximum pool size)
 - [ ] Filter unmatched urls before getTitle
 - [ ] Add comments
