@@ -1,4 +1,5 @@
 val Http4sVersion = "0.21.5"
+val TapirVersion = "0.16.16"
 val CirceVersion = "0.13.0"
 val ScalaTestVersion = "3.2.0"
 val LogbackVersion = "1.2.3"
@@ -31,6 +32,15 @@ lazy val root = (project in file("."))
       "org.scalatest" %% "scalatest" % ScalaTestVersion % "test",
       "ch.qos.logback" % "logback-classic" % LogbackVersion,
       "org.jsoup" % "jsoup" % JsoupVersion,
+
+      "org.webjars" % "swagger-ui" % "3.20.9",
+
+      //tapir libs
+      "com.softwaremill.sttp.tapir" %% "tapir-core" % TapirVersion,
+      "com.softwaremill.sttp.tapir" %% "tapir-http4s-server" % TapirVersion,
+      "com.softwaremill.sttp.tapir" %% "tapir-json-circe" % TapirVersion,
+      "com.softwaremill.sttp.tapir" %% "tapir-openapi-docs" % TapirVersion,
+      "com.softwaremill.sttp.tapir" %% "tapir-openapi-circe-yaml" % TapirVersion
     ),
   )
 coverageEnabled.in(Test, test) := true

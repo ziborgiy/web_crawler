@@ -15,6 +15,8 @@ import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
 
 class CrawlerSpec extends AnyFlatSpec with Matchers {
+  //FIXME!! - INVALID TESTS
+
   val success: Titles[IO] = (vector: Vector[String]) => Map("http://google.com" -> "Google").pure[IO]
   val response: IO[Response[IO]] = WebcrawlerRoutes.crawlerRoutes[IO](success).orNotFound.run(
     Method.POST(json"""{"urls":["http://google.com/"]}""", uri"/getTitles").unsafeRunSync()
